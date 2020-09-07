@@ -2,18 +2,18 @@
 
 namespace PostgreSQL.Models
 {
-    public class AccountsContext : DbContext
+    public class ActorContext : DbContext
     {
-        public AccountsContext()
+        public ActorContext()
         {
         }
 
-        public AccountsContext(DbContextOptions<AccountsContext> options)
+        public ActorContext(DbContextOptions<ActorContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<Actor> Account { get; set; }
+        public virtual DbSet<Actor> Actor { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

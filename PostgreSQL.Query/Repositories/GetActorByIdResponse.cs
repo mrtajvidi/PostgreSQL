@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Reflection;
 
-namespace PostgreSQL.Models
+namespace PostgreSQL.Query.Repositories
 {
-    public class Actor
+    public class GetActorByIdResponse
     {
+
         public int ActorId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime LastUpdate { get; set; }
+
     }
 }

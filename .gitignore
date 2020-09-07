@@ -7,3 +7,6 @@
 /PostgreSQL/obj/*
 .vs/PostgreSQL/v16/.suo
 .vs/PostgreSQL/v16/.suo
+PostgreSQL.Query/obj/*
+PostgreSQL.Query/bin/*
+.vs/PostgreSQL/v16/.suo

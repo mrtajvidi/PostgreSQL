@@ -1,6 +1,6 @@
 using System;
 
-namespace PostgreSQL
+namespace PostgreSQL.Models
 {
     public class WeatherForecast
     {

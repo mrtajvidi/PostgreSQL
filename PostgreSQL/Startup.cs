@@ -1,18 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.OpenApi.Models;
+using PostgreSQL.Handlers;
 using PostgreSQL.Models;
 
 namespace PostgreSQL
@@ -29,14 +22,14 @@ namespace PostgreSQL
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Account API", Version = "v1" }));
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "PostgreSQL", Version = "v1" }));
 
             var accountWriteDbOptions = Configuration.GetSection("ConnectionStrings:AccountWriteContext").Get<AccountDbOptions>();
-            services.AddDbContext<AccountsContext>(options =>
+            services.AddDbContext<ActorContext>(options =>
                 options.UseNpgsql(accountWriteDbOptions.ConnectionString));
 
-
             services.AddControllers();
+            services.AddScoped<DvdRentalHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +52,7 @@ namespace PostgreSQL
 
             app.UseAuthorization();
 
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
